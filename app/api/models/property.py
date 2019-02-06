@@ -10,7 +10,7 @@ class Property(models.Model):
     """This class represents the property model."""
     PRICE_MODES = (
         ('A', 'Arriendo'),
-        ('C', 'Compra'),
+        ('B', 'Compra'),
     )
     PROPERTY_TYPES = (
         ('A', 'Apartamentos'),
@@ -112,30 +112,6 @@ class Property(models.Model):
     def __str__(self):
         """Return a human readable representation of the model instance."""
         return "{}".format(self.name)
-
-
-class PropertyType(models.Model):
-    """This class represents the property type model."""
-    owner = models.ForeignKey(
-        'auth.User',  # ADD THIS FIELD
-        related_name='property_types',
-        on_delete=models.CASCADE
-    )
-    type = models.CharField(
-        max_length=255,
-        blank=False,
-        unique=True
-    )
-    date_created = models.DateTimeField(
-        auto_now_add=True
-    )
-    date_modified = models.DateTimeField(
-        auto_now=True
-    )
-
-    def __str__(self):
-        """Return a human readable representation of the model instance."""
-        return "{}".format(self.type)
 
 
 # This receiver handles token creation immediately a new user is created.

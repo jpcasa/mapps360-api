@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from ..models.property import Property, PropertyType
+from ..models.property import Property
 
 
 class PropertySerializer(serializers.ModelSerializer):
@@ -32,12 +32,3 @@ class PropertySerializer(serializers.ModelSerializer):
             'date_modified'
         )
         read_only_fields = ('date_created', 'date_modified')
-
-
-class PropertyTypesSerializer(serializers.ModelSerializer):
-    """Serializer to map the Model instance into JSON format."""
-
-    class Meta:
-        """Meta class to map serializer's fields with the model fields."""
-        model = PropertyType
-        fields = ('id', 'type')

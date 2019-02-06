@@ -3,6 +3,7 @@ from rest_framework.permissions import BasePermission
 from .models.address import City, Country, Address
 from .models.floor_plan import FloorPlan
 from .models.picture import Picture
+from .models.profile import Profile
 from .models.property import Property
 from .models.review import Review
 
@@ -35,6 +36,16 @@ class IsOwnerPicture(BasePermission):
         if isinstance(obj, Picture):
             return obj.owner == request.user
         return obj.owner == request.user
+
+
+class IsOwnerProfile(BasePermission):
+    """Custom permission class to allow only profile owners to edit them."""
+
+    def has_object_permission(self, request, view, obj):
+        """Return True if permission is granted to the profile owner."""
+        if isinstance(obj, Profile):
+            return obj.user == request.user
+        return obj.user == request.user
 
 
 class IsOwnerProperty(BasePermission):

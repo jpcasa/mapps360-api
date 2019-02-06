@@ -5,6 +5,6 @@ from .ammenity import Ammenity as _Ammenity
 from .files import File as _File
 from .floor_plan import FloorPlan as _FloorPlan
 from .picture import Picture as _Picture
+from .profile import Profile as _Profile
 from .property import Property as _Property
-from .property import PropertyType as _PropertyType
 from .review import Review as _Review

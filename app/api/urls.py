@@ -10,9 +10,9 @@ from .views.ammenity import AmmenityCreateView, AmmenityDetailsView
 from .views.files import FileView
 from .views.floor_plan import FloorPlanCreateView, FloorPlanDetailsView
 from .views.picture import PictureCreateView, PictureDetailsView
-from .views.property import (
-    PropertyCreateView, PropertyDetailsView,
-    PropertyTypeCreateView, PropertyTypeDetailsView)
+from .views.profile import (
+    ProfileListView, ProfileCreateView, ProfileDetailsView)
+from .views.property import PropertyCreateView, PropertyDetailsView
 from .views.review import ReviewCreateView, ReviewDetailsView
 from .views.user import UserCreateView, UserDetailsView
 
@@ -95,6 +95,21 @@ urlpatterns = {
         name="picture_details"
     ),
     path(
+        'profiles/',
+        ProfileListView.as_view(),
+        name="profiles"
+    ),
+    path(
+        'profiles/create/',
+        ProfileCreateView.as_view(),
+        name="profiles"
+    ),
+    path(
+        'profiles/get/<int:pk>/',
+        ProfileDetailsView.as_view(),
+        name="profile_details"
+    ),
+    path(
         'properties/',
         PropertyCreateView.as_view(),
         name="properties"
@@ -103,16 +118,6 @@ urlpatterns = {
         'properties/<int:pk>/',
         PropertyDetailsView.as_view(),
         name="property_details"
-    ),
-    path(
-        'property-types/',
-        PropertyTypeCreateView.as_view(),
-        name="property_types"
-    ),
-    path(
-        'property-types/<int:pk>/',
-        PropertyTypeDetailsView.as_view(),
-        name="property_type_details"
     ),
     path(
         'reviews/',
