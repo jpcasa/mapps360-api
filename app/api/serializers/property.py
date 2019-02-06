@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from ..models.property import Property
+from ..models.property import Property, PropertyType
 
 
 class PropertySerializer(serializers.ModelSerializer):
@@ -9,5 +9,35 @@ class PropertySerializer(serializers.ModelSerializer):
     class Meta:
         """Meta class to map serializer's fields with the model fields."""
         model = Property
-        fields = ('id', 'name', 'owner', 'date_created', 'date_modified')
+        fields = (
+            'id',
+            'owner',
+            'name',
+            'url',
+            'address',
+            'ammenities',
+            'description',
+            'price',
+            'mode',
+            'type',
+            'year_built',
+            'square_meters',
+            'rooms',
+            'bathrooms',
+            'garages',
+            'pictures',
+            'floor_plan',
+            'status',
+            'date_created',
+            'date_modified'
+        )
         read_only_fields = ('date_created', 'date_modified')
+
+
+class PropertyTypesSerializer(serializers.ModelSerializer):
+    """Serializer to map the Model instance into JSON format."""
+
+    class Meta:
+        """Meta class to map serializer's fields with the model fields."""
+        model = PropertyType
+        fields = ('id', 'type')

@@ -40,7 +40,7 @@ class ViewTestCase(TestCase):
         # Since user model instance is not serializable, use its Id/PK
         self.property_data = {'name': 'Go to Ibiza', 'owner': user.id}
         self.response = self.client.post(
-            reverse('createProperty'),
+            reverse('properties'),
             self.property_data,
             format="json")
 
@@ -54,7 +54,7 @@ class ViewTestCase(TestCase):
         """Test that the api has user authorization."""
         new_client = APIClient()
         res = new_client.get('/properties/', kwargs={'pk': 3}, format="json")
-        self.assertEqual(res.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(res.status_code, status.HTTP_401_UNAUTHORIZED)
 
 
     def test_api_can_get_a_property(self):
@@ -73,7 +73,7 @@ class ViewTestCase(TestCase):
         property = Property.objects.get()
         change_property = {'name': 'Something new'}
         res = self.client.put(
-            reverse('detailsProperty', kwargs={'pk': property.id}),
+            reverse('property_details', kwargs={'pk': property.id}),
             change_property, format='json'
         )
         self.assertEqual(res.status_code, status.HTTP_200_OK)
@@ -83,7 +83,7 @@ class ViewTestCase(TestCase):
         """Test the api can delete a property."""
         property = Property.objects.get()
         response = self.client.delete(
-            reverse('detailsProperty', kwargs={'pk': property.id}),
+            reverse('property_details', kwargs={'pk': property.id}),
             format='json',
             follow=True)
         self.assertEquals(response.status_code, status.HTTP_204_NO_CONTENT)
