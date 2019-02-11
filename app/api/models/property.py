@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 from django.dispatch import receiver
 
-from .address import Address
 
 class Property(models.Model):
     """This class represents the property model."""
@@ -108,10 +107,41 @@ class Property(models.Model):
         auto_now=True
     )
 
-
     def __str__(self):
         """Return a human readable representation of the model instance."""
         return "{}".format(self.name)
+
+
+class PropertyList(models.Model):
+    """This class represents the property list model."""
+    owner = models.ForeignKey(
+        'auth.User',  # ADD THIS FIELD
+        related_name='property_lists',
+        on_delete=models.CASCADE
+    )
+    name = models.CharField(
+        blank=False,
+        max_length=100
+    )
+    url = models.CharField(
+        blank=False,
+        max_length=100
+    )
+    participants = models.ManyToManyField(
+        'api.profile'
+    )
+    properties = models.ManyToManyField(
+        'api.property'
+    )
+    private = models.BooleanField(
+        default=True
+    )
+    date_created = models.DateTimeField(
+        auto_now_add=True
+    )
+    date_modified = models.DateTimeField(
+        auto_now=True
+    )
 
 
 # This receiver handles token creation immediately a new user is created.

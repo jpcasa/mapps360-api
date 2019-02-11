@@ -26,3 +26,7 @@ class Profile(models.Model):
         blank=True,
         max_length=100
     )
+
+    def __str__(self):
+        """Return a human readable representation of the model instance."""
+        return "{}".format(self.user.email)

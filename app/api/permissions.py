@@ -4,7 +4,7 @@ from .models.address import City, Country, Address
 from .models.floor_plan import FloorPlan
 from .models.picture import Picture
 from .models.profile import Profile
-from .models.property import Property
+from .models.property import Property, PropertyList
 from .models.review import Review
 
 
@@ -54,6 +54,16 @@ class IsOwnerProperty(BasePermission):
     def has_object_permission(self, request, view, obj):
         """Return True if permission is granted to the property owner."""
         if isinstance(obj, Property):
+            return obj.owner == request.user
+        return obj.owner == request.user
+
+
+class IsOwnerPropertyList(BasePermission):
+    """Custom permission class to allow only property list owners to edit them."""
+
+    def has_object_permission(self, request, view, obj):
+        """Return True if permission is granted to the property list owner."""
+        if isinstance(obj, PropertyList):
             return obj.owner == request.user
         return obj.owner == request.user
 

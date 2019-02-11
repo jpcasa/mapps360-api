@@ -12,7 +12,9 @@ from .views.floor_plan import FloorPlanCreateView, FloorPlanDetailsView
 from .views.picture import PictureCreateView, PictureDetailsView
 from .views.profile import (
     ProfileListView, ProfileCreateView, ProfileDetailsView)
-from .views.property import PropertyCreateView, PropertyDetailsView
+from .views.property import (
+    PropertyCreateView, PropertyDetailsView, PropertyListListView,
+    PropertyListCreateView, PropertyListDetailsView)
 from .views.review import ReviewCreateView, ReviewDetailsView
 from .views.user import UserCreateView, UserDetailsView
 
@@ -118,6 +120,21 @@ urlpatterns = {
         'properties/<int:pk>/',
         PropertyDetailsView.as_view(),
         name="property_details"
+    ),
+    path(
+        'property-lists/',
+        PropertyListListView.as_view(),
+        name="property_lists"
+    ),
+    path(
+        'property-lists/create/',
+        PropertyListCreateView.as_view(),
+        name="property_lists_create"
+    ),
+    path(
+        'property-lists/get/<int:pk>/',
+        PropertyListDetailsView.as_view(),
+        name="property_lists_detail"
     ),
     path(
         'reviews/',

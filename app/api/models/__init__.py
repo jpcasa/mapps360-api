@@ -7,4 +7,5 @@ from .floor_plan import FloorPlan as _FloorPlan
 from .picture import Picture as _Picture
 from .profile import Profile as _Profile
 from .property import Property as _Property
+from .property import PropertyList as _PropertyList
 from .review import Review as _Review
